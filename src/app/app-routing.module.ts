@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', 
     component: PatientLayoutComponent,
   },
   {

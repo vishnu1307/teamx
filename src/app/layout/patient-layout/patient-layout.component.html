@@ -1,1 +1,10 @@
-<p>patient-layout works!</p>
+<nb-card>
+    <nb-card-body class="example-items-col">
+        <div>
+            <h4>Start the recording</h4>
+            <button style="margin:10px" (click)="start()" status="primary" nbButton>Start</button>
+            <button style="margin:10px" (click)="stop()" status="primary" nbButton>Stop</button>
+            <textarea nbInput fullWidth [(ngModel)]="service.text"></textarea>
+        </div>
+    </nb-card-body>
+</nb-card>

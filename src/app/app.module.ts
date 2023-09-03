@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { PatientLayoutComponent } from './layout/patient-layout/patient-layout.component';
 import { HospitalLayoutComponent } from './layout/hospital-layout/hospital-layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCardModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbButtonModule,
+    NbInputModule,
+    NbCardModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
