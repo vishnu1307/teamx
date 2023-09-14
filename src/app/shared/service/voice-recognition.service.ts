@@ -19,7 +19,9 @@ export class VoiceRecognitionService {
 
     this.recognition.addEventListener('result', (e: { results: { transcript: any }[][] }) => {
       const transcript = e.results[0][0].transcript;
-      this.tempWords = transcript;
+      if(transcript){
+        this.tempWords = transcript;
+      }
       console.log(transcript);
     });
 

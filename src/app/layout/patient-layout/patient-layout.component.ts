@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
+import { ApiServiceService } from 'src/app/shared/service/api-service.service';
 import { VoiceRecognitionService } from 'src/app/shared/service/voice-recognition.service';
-// import { ApiService } from 'src/app/api.service'; // Adjust the path to match your project structure
- // Import the ApiService
 
 @Component({
   selector: 'app-patient-layout',
@@ -17,7 +16,7 @@ export class PatientLayoutComponent implements OnDestroy {
 
   constructor(
     public service: VoiceRecognitionService,
-    // private apiService: ApiService // Inject the ApiService
+    private apiservice: ApiServiceService
   ) {
     this.service.init();
   }
@@ -52,21 +51,22 @@ export class PatientLayoutComponent implements OnDestroy {
 
       if (recordedText) {
         // Send the recorded text to the API
-        // this.apiService.sendRecordedText({ recorded_text: recordedText }).subscribe(
-        //   (response) => {
-        //     console.log('API Response:', response);
-        //     this.showTextArea = false;
-        //     this.showSubmitButton = false;
-        //     this.showThankYou = true;
-        //   },
-        //   (error) => {
-        //     console.error('API Error:', error);
-        //     // Handle API error here
-        //   }
-        // );
+        this.apiservice.createRecord({ recorded_text: recordedText }).subscribe(
+          (response) => {
+            console.log('API Response:', response);
+            this.showTextArea = false;
+            this.showSubmitButton = false;
+            this.showThankYou = true;
+          },
+          (error) => {
+            console.error('API Error:', error);
+            // Handle API error here
+          }
+        );
       } else {
         alert('No recorded text to submit.');
       }
+
     }
   }
 }
