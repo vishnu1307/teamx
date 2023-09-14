@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ApiServiceService } from 'src/app/shared/service/api-service.service';
 import { VoiceRecognitionService } from 'src/app/shared/service/voice-recognition.service';
 
+const apiUrl = 'http://localhost:5000';
 @Component({
   selector: 'app-patient-layout',
   templateUrl: './patient-layout.component.html',
