@@ -1,7 +1,8 @@
 <!-- patient-layout.component.html -->
 <div class="patient-layout">
   <div class="recording-container">
-    <img src="../assets/images/MICROPHONE.png" alt="Microphone" class="mic-image" />
+    <img src="../assets/images/mic.jpg" alt="Microphone" class="mic-image" *ngIf="recordingState != 'Recording'"/>
+    <img src="../assets/images/enable-mic.gif" alt="Microphone" class="mic-image" *ngIf="recordingState == 'Recording'"/>
     <button (click)="toggleRecording()" class="record-button">
       {{ recordingState }}
     </button>

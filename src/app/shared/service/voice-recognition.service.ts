@@ -78,7 +78,9 @@ export class VoiceRecognitionService {
   }
 
   wordConcat() {
-    this.text = this.text + ' ' + this.tempWords + '.';
-    this.tempWords = '';
+    if(this.tempWords){
+      this.text = this.text + ' ' + this.tempWords + '.';
+      this.tempWords = '';
+    }
   }
 }

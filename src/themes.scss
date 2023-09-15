@@ -3,7 +3,8 @@
 @use '@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme((
-
+    header-height: 4rem,
+    footer-height: 1rem
   // add your variables here like:
 
   // color-primary-100: #f2f6ff,
