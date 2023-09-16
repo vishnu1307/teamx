@@ -14,7 +14,7 @@ export class PatientLayoutComponent implements OnDestroy {
   showTextArea = false;
   showSubmitButton = false;
   showThankYou = false;
-
+  isSubmit = false;
   constructor(
     public service: VoiceRecognitionService,
     private apiservice: ApiServiceService
@@ -49,7 +49,7 @@ export class PatientLayoutComponent implements OnDestroy {
       // Send the recorded text to the backend API
       this.service.stop(); // Ensure the speech recognition service is stopped
       const recordedText = this.service.text;
-
+      this.isSubmit = true;
       if (recordedText) {
         // Send the recorded text to the API
         this.apiservice.createRecord({ recorded_text: recordedText }).subscribe(
@@ -58,8 +58,10 @@ export class PatientLayoutComponent implements OnDestroy {
             this.showTextArea = false;
             this.showSubmitButton = false;
             this.showThankYou = true;
+            this.isSubmit = false;
           },
           (error) => {
+            this.isSubmit = false;
             console.error('API Error:', error);
             // Handle API error here
           }
