@@ -1,28 +1,24 @@
 <!-- patient-layout.component.html -->
 <div class="patient-layout">
-  <div class="recording-container">
-    <img src="../assets/images/mic.jpg" alt="Microphone" class="mic-image" *ngIf="recordingState != 'Recording'"/>
-    <img src="../assets/images/enable-mic.gif" alt="Microphone" class="mic-image" *ngIf="recordingState == 'Recording'"/>
-    <button (click)="toggleRecording()" class="record-button">
-      {{ recordingState }}
+    <div class="recording-container">
+        <img src="../assets/images/mic.jpg" alt="Microphone" class="mic-image" *ngIf="recordingState != 'Recording'" />
+        <img src="../assets/images/enable-mic.gif" alt="Microphone" class="mic-image"
+            *ngIf="recordingState == 'Recording'" />
+    </div>
+    <div>
+        <button (click)="toggleRecording()"nbButton size="giant" shape="semi-round" status="success" >
+            {{ recordingState }}
+        </button>
+    </div>
+    <div style="margin-top: 20px;">
+    <textarea *ngIf="showTextArea" nbInput fullWidth [(ngModel)]="service.text"
+        placeholder="Recorded response will appear here..."></textarea>
+    <button nbButton size="large" shape="semi-round" status="success" *ngIf="showSubmitButton"
+        (click)="submitResponse()" [disabled]="recordingState !== 'Recording Stopped' && isSubmit">
+        Submit
     </button>
-  </div>
-  <textarea
-    *ngIf="showTextArea"
-    nbInput
-    fullWidth
-    [(ngModel)]="service.text"
-    placeholder="Recorded response will appear here..."
-  ></textarea>
-  <button
-    *ngIf="showSubmitButton"
-    (click)="submitResponse()"
-    class="submit-button"
-    [disabled]="recordingState !== 'Recording Stopped'"
-  >
-    Submit
-  </button>
-  <div *ngIf="showThankYou" class="thank-you-message">
-    Thank you for submitting your response
-  </div>
+    </div>
+    <div *ngIf="showThankYou" class="thank-you-message">
+        Thank you for submitting your response
+    </div>
 </div>
