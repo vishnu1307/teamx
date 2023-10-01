@@ -2,7 +2,17 @@
 
   <nb-layout-header fixed>
     <!-- Insert header here -->
+    <nb-layout-column>
+      <a href="/#/" class="icon-block">
       <img src="../assets/images/Inpatient_InsightsLogo.png"  width="250" height="125">
+      </a>
+      </nb-layout-column>
+    <nb-layout-column style="width: 84%;" left></nb-layout-column>
+    <nb-layout-column left>
+      <a href="/#/hospital" class="icon-block">
+        <nb-icon icon="log-in-outline" style="font-size: 25px;" [options]="{ animation: { type: 'zoom' } }" nbTooltip="Hospital Portal" ></nb-icon>
+      </a>
+    </nb-layout-column>
   </nb-layout-header>
 
   <nb-layout-column>
