@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { NbToastrService } from '@nebular/theme';
 import { ApiServiceService } from 'src/app/shared/service/api-service.service';
 import { VoiceRecognitionService } from 'src/app/shared/service/voice-recognition.service';
 
@@ -17,7 +18,8 @@ export class PatientLayoutComponent implements OnDestroy {
   isSubmit = false;
   constructor(
     public service: VoiceRecognitionService,
-    private apiservice: ApiServiceService
+    private apiservice: ApiServiceService,
+    private toastrService: NbToastrService
   ) {
     this.service.init();
   }
@@ -44,7 +46,9 @@ export class PatientLayoutComponent implements OnDestroy {
   submitResponse() {
     if (this.recordingState === 'Recording') {
       // Alert user to stop recording first before submitting
-      alert('Stop recording first before submitting.');
+      // alert('Stop recording first before submitting.');
+      // this.toastrService.show('warning', `Stop recording first before submitting.`);
+      this.toastrService.danger('Stop recording first before submitting.', 'Warning');
     } else {
       // Send the recorded text to the backend API
       this.service.stop(); // Ensure the speech recognition service is stopped
@@ -59,15 +63,17 @@ export class PatientLayoutComponent implements OnDestroy {
             this.showSubmitButton = false;
             this.showThankYou = true;
             this.isSubmit = false;
+          this.toastrService.success('Your feedback saved successfully', 'Success');
           },
           (error) => {
             this.isSubmit = false;
-            console.error('API Error:', error);
+            // console.error('API Error:', error);
+          this.toastrService.danger('Something Went Worng', 'Error');
             // Handle API error here
           }
         );
       } else {
-        alert('No recorded text to submit.');
+        this.toastrService.danger('No recorded text to submit.', 'Warning');
       }
 
     }

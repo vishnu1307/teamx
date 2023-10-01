@@ -1,12 +1,12 @@
 <!-- patient-layout.component.html -->
 <div class="patient-layout">
     <div class="recording-container">
-        <img src="../assets/images/mic.jpg" alt="Microphone" class="mic-image" *ngIf="recordingState != 'Recording'" />
+        <img src="../assets/images/mic.jpg" alt="Microphone" class="mic-image" *ngIf="recordingState != 'Recording'" (click)="toggleRecording()" />
         <img src="../assets/images/enable-mic.gif" alt="Microphone" class="mic-image"
-            *ngIf="recordingState == 'Recording'" />
+            *ngIf="recordingState == 'Recording'" (click)="toggleRecording()"  />
     </div>
     <div>
-        <button (click)="toggleRecording()"nbButton size="giant" shape="semi-round" status="success" >
+        <button (click)="toggleRecording()" nbButton size="giant" shape="semi-round" status="primary" >
             {{ recordingState }}
         </button>
     </div>
