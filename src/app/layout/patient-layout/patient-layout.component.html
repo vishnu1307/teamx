@@ -10,6 +10,11 @@
             {{ recordingState }}
         </button>
     </div>
+    <div style="margin-top: 10px;">
+        <nb-select placeholder="Select Languages" [(selected)]="selectedItem">
+            <nb-option *ngFor="let lang of languages" value="lang.code">{{lang.name}}</nb-option>
+        </nb-select>
+    </div>
     <div style="margin-top: 20px;">
     <textarea *ngIf="showTextArea" nbInput fullWidth [(ngModel)]="service.text"
         placeholder="Recorded response will appear here..."></textarea>

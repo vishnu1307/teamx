@@ -16,6 +16,8 @@ export class PatientLayoutComponent implements OnDestroy {
   showSubmitButton = false;
   showThankYou = false;
   isSubmit = false;
+  languages = [{name: "English", code: "en"}, {name: "Tamil", code: "tn"},]
+  selectedItem = null;
   constructor(
     public service: VoiceRecognitionService,
     private apiservice: ApiServiceService,

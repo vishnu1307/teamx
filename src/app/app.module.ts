@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PatientLayoutComponent } from './layout/patient-layout/patient-layout.component';
 import { HospitalLayoutComponent } from './layout/hospital-layout/hospital-layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCardModule, NbToastrService, NbToastrModule, NbIconModule, NbTooltipModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCardModule, NbToastrService, NbToastrModule, NbIconModule, NbTooltipModule, NbSelectModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -29,6 +29,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NbInputModule,
     NbTooltipModule,
     NbCardModule,
+    NbSelectModule,
     NbToastrModule.forRoot(),
     FormsModule,
     HttpClientModule
