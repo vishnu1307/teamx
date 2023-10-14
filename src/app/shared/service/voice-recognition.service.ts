@@ -13,9 +13,9 @@ export class VoiceRecognitionService {
 
   constructor() {}
 
-  init() {
+  init(lang: String) {
     this.recognition.interimResults = true;
-    this.recognition.lang = 'en-US';
+    this.recognition.lang = lang;
 
     this.recognition.addEventListener('result', (e: { results: { transcript: any }[][] }) => {
       const transcript = e.results[0][0].transcript;

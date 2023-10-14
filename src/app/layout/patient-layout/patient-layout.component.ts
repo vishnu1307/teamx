@@ -17,21 +17,27 @@ export class PatientLayoutComponent implements OnDestroy {
   showSubmitButton = false;
   showThankYou = false;
   isSubmit = false;
-  languages = [{name: "English", code: "en"}, {name: "Tamil", code: "tn"},]
+  languages = [{name: "English", code: "en-IN"},
+   {name: "Tamil", code: 'ta-IN'},
+   {name: "Hindi", code: 'hi-IN'},
+   {name: "Arabic", code: 'ar-SA'},
+  ]
   selectedItem = null;
   constructor(
     public service: VoiceRecognitionService,
     private apiservice: ApiServiceService,
     private toastrService: NbToastrService
   ) {
-    this.service.init();
+    this.service.init('en-IN');
   }
 
   ngOnDestroy() {
     // Ensure the speech recognition service is stopped when the component is destroyed
     this.service.stop();
   }
-
+  changeLanguage(e: any){
+    this.service.init(e);
+  }
   toggleRecording() {
     if (this.recordingState === 'Start Recording' || this.recordingState === 'Recording Stopped') {
       // Start recording
