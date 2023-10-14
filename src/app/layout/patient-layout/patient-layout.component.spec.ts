@@ -1,3 +1,4 @@
+/*patient-layout.component.spec.ts*/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PatientLayoutComponent } from './patient-layout.component';
 

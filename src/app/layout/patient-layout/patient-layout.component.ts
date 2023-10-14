@@ -1,3 +1,4 @@
+/*patient-layout.component.ts*/
 import { Component, OnDestroy } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 import { ApiServiceService } from 'src/app/shared/service/api-service.service';
