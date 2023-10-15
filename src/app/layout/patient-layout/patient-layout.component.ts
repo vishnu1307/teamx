@@ -17,7 +17,7 @@ export class PatientLayoutComponent implements OnDestroy {
   showSubmitButton = false;
   showThankYou = false;
   isSubmit = false;
-  languages = [{name: "English", code: "en-IN"},
+  languages = [{name: "English", code: "en-US"},
    {name: "Tamil", code: 'ta-IN'},
    {name: "Hindi", code: 'hi-IN'},
    {name: "Arabic", code: 'ar-SA'},
@@ -28,7 +28,7 @@ export class PatientLayoutComponent implements OnDestroy {
     private apiservice: ApiServiceService,
     private toastrService: NbToastrService
   ) {
-    this.service.init('en-IN');
+    this.service.init('en-US');
   }
 
   ngOnDestroy() {
