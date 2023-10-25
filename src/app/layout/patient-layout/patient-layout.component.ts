@@ -1,10 +1,10 @@
-/*patient-layout.component.ts*/
 import { Component, OnDestroy } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 import { ApiServiceService } from 'src/app/shared/service/api-service.service';
 import { VoiceRecognitionService } from 'src/app/shared/service/voice-recognition.service';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-const apiUrl = 'http://localhost:5000';
 @Component({
   selector: 'app-patient-layout',
   templateUrl: './patient-layout.component.html',
@@ -17,27 +17,53 @@ export class PatientLayoutComponent implements OnDestroy {
   showSubmitButton = false;
   showThankYou = false;
   isSubmit = false;
-  languages = [{name: "English", code: "en-US"},
-   {name: "Tamil", code: 'ta-IN'},
-   {name: "Hindi", code: 'hi-IN'},
-   {name: "Arabic", code: 'ar-SA'},
-  ]
+  languages = [
+    { name: "English", code: "en-US" },
+    { name: "Tamil", code: 'ta-IN' },
+    { name: "Hindi", code: 'hi-IN' },
+    { name: "Arabic", code: 'ar-SA' },
+  ];
   selectedItem = null;
-  constructor(
-    public service: VoiceRecognitionService,
-    private apiservice: ApiServiceService,
-    private toastrService: NbToastrService
-  ) {
-    this.service.init('en-US');
-  }
+  uploadedImage: string | null = null; // Initialize uploadedImage property
 
-  ngOnDestroy() {
-    // Ensure the speech recognition service is stopped when the component is destroyed
-    this.service.stop();
+  forms: FormGroup;
+  constructor(public fb: FormBuilder, private http: HttpClient) {
+    this.forms = this.fb.group({
+      name: [''],
+      avatar: [null],
+    });
   }
-  changeLanguage(e: any){
+  ngOnInit() {}
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    this.forms.patchValue({
+      avatar: file,
+    });
+    if(this.forms){
+    this.forms.get('avatar').updateValueAndValidity();
+    }
+  }
+  submitForm() {
+    var formData: any = new FormData();
+    // formData.append('name', this.forms.get('name').value);
+    formData.append('image', this.forms.get('avatar').value);
+    this.http.post('http://127.0.0.1:5002/classify', formData).subscribe(
+      (response) => console.log(response),
+      (error) => {
+        console.log(error.message);
+      }
+    );
+    }
+  ngOnDestroy() {
+    //   // Ensure the speech recognition service is stopped when the component is destroyed
+    //   this.service.stop();
+   }
+  /*
+
+  changeLanguage(e: any) {
     this.service.init(e);
   }
+
   toggleRecording() {
     if (this.recordingState === 'Start Recording' || this.recordingState === 'Recording Stopped') {
       // Start recording
@@ -54,9 +80,7 @@ export class PatientLayoutComponent implements OnDestroy {
 
   submitResponse() {
     if (this.recordingState === 'Recording') {
-      // Alert user to stop recording first before submitting
-      // alert('Stop recording first before submitting.');
-      // this.toastrService.show('warning', `Stop recording first before submitting.`);
+      // Alert the user to stop recording first before submitting
       this.toastrService.danger('Stop recording first before submitting.', 'Warning');
     } else {
       // Send the recorded text to the backend API
@@ -72,19 +96,37 @@ export class PatientLayoutComponent implements OnDestroy {
             this.showSubmitButton = false;
             this.showThankYou = true;
             this.isSubmit = false;
-          this.toastrService.success('Your feedback saved successfully', 'Success');
+            this.toastrService.success('Your feedback saved successfully', 'Success');
           },
           (error) => {
             this.isSubmit = false;
-            // console.error('API Error:', error);
-          this.toastrService.danger('Something Went Worng', 'Error');
+            this.toastrService.danger('Something Went Wrong', 'Error');
             // Handle API error here
           }
         );
       } else {
         this.toastrService.danger('No recorded text to submit.', 'Warning');
       }
-
     }
   }
+  */
+  // Function for handling image upload
+  // uploadImage(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.uploadedImage = e.target.result as string;
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
+  // // Function for submitting the uploaded image
+  // submitImage() {
+  //   if (this.uploadedImage) {
+  //     // Process and send the uploaded image to the API
+  //     // ...
+  //   }
+  // }
 }

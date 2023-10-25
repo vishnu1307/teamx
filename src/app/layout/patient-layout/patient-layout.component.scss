@@ -1,5 +1,5 @@
 .patient-layout {
-  background: url('/assets/images/Inpatientprompts5.gif') center/cover no-repeat;
+  background: url('/assets/images/Inpatientprompts6.gif') center/cover no-repeat;
   text-align: center;
   padding: 20px;
 
@@ -10,8 +10,8 @@
     margin-bottom: 40px;
 
     .mic-image {
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       background-color: rgb(249, 252, 251);
       border-radius: 50%;
       padding: 10px;
@@ -50,5 +50,28 @@
     font-size: 18px;
   }
 
+  /* Styles for the image upload section */
+  .image-upload-button {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: #58ead9;
+    border: 2px solid #007acc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 
+  .upload-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .uploaded-image {
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+  }
 }

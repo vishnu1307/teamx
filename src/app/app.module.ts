@@ -8,7 +8,7 @@ import { HospitalLayoutComponent } from './layout/hospital-layout/hospital-layou
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCardModule, NbToastrService, NbToastrModule, NbIconModule, NbTooltipModule, NbSelectModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -32,6 +32,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NbSelectModule,
     NbToastrModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
