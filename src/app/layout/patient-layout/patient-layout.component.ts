@@ -1,5 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+/*patient-layout.component.ts*/
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { WebcamImage } from 'ngx-webcam';
+import { ImageCaptureComponent } from 'src/app/shared/components/image-capture/image-capture.component';
 import { ApiServiceService } from 'src/app/shared/service/api-service.service';
 import { VoiceRecognitionService } from 'src/app/shared/service/voice-recognition.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +15,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   providers: [VoiceRecognitionService],
 })
 export class PatientLayoutComponent implements OnDestroy {
+  @ViewChild('dialog') dialog: TemplateRef<any>;
+  @ViewChild('dialog1') dialog1: TemplateRef<any>;
+
   recordingState = 'Start Recording';
   showTextArea = false;
   showSubmitButton = false;
@@ -25,9 +31,17 @@ export class PatientLayoutComponent implements OnDestroy {
   ];
   selectedItem = null;
   uploadedImage: string | null = null; // Initialize uploadedImage property
+  // constructor(
+  //   public service: VoiceRecognitionService,
+  //   private apiservice: ApiServiceService,
+  //   private toastrService: NbToastrService,
+  //   private dialogService: NbDialogService,
+  // ) {
+  //   this.service.init('en-US');
+  // }
 
   forms: FormGroup;
-  constructor(public fb: FormBuilder, private http: HttpClient) {
+  constructor(public fb: FormBuilder, private http: HttpClient, private dialogService: NbDialogService, private toastrService: NbToastrService ) {
     this.forms = this.fb.group({
       name: [''],
       avatar: [null],
@@ -36,9 +50,20 @@ export class PatientLayoutComponent implements OnDestroy {
   ngOnInit() {}
   uploadFile(event: any) {
     const file = event.target.files[0];
-    this.forms.patchValue({
-      avatar: file,
-    });
+    // this.forms.patchValue({
+    //   avatar: file,
+    // });
+    // const file = event.target.files[0];
+    if (file) {
+      this.forms.patchValue({
+        avatar: file,
+      });
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.uploadedImage = e.target.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
     if(this.forms){
     this.forms.get('avatar').updateValueAndValidity();
     }
@@ -48,8 +73,15 @@ export class PatientLayoutComponent implements OnDestroy {
     // formData.append('name', this.forms.get('name').value);
     formData.append('image', this.forms.get('avatar').value);
     this.http.post('http://127.0.0.1:5002/classify', formData).subscribe(
-      (response) => console.log(response),
+      (response:any ) => {
+        if(response.result){
+          this.dialogService.open(this.dialog, { closeOnBackdropClick: false });
+
+        }
+      },
       (error) => {
+        this.toastrService.danger('Something Went Wrong', 'Error');
+        this.dialogService.open(this.dialog, { closeOnBackdropClick: false });
         console.log(error.message);
       }
     );

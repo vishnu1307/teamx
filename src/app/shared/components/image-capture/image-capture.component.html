@@ -1,0 +1,32 @@
+
+
+
+<nb-card>
+    <nb-card-header>Take Image</nb-card-header>
+    <nb-card-body>
+        <div style="text-align:center">
+            <div>
+                <ng-container *ngIf="!showImage">
+                <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                 [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
+                 (initError)="handleInitError($event)" ></webcam>
+                </ng-container>
+                <br/>
+                <div class="snapshot" *ngIf="showImage && webcamImage">
+                    <img [src]="webcamImage.imageAsDataUrl" />
+                </div>
+                <div style="position:relative;align-items: center;">
+                    <button nbButton style="float:left; margin-left: 10px;" (click)="triggerSnapshot();" status="primary">Take Picture</button>
+                    <button nbButton style="float:left; margin-left: 10px;" (click)="showImage=false" status="primary">Retake</button>
+                    <button nbButton style="float:left; margin-left: 10px;" (click)="showNextWebcam(true);"  status="primary">Switch Camera</button>
+                </div>
+            </div>
+        </div>
+        
+        <h4 *ngIf="errors.length > 0">Messages:</h4>
+        <ul *ngFor="let error of errors">
+            <li>{{error | json}}</li>
+        </ul>
+    </nb-card-body>
+    <nb-card-footer>By Wikipedia</nb-card-footer>
+</nb-card>

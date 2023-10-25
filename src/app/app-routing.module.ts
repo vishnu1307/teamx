@@ -4,6 +4,7 @@ import { HospitalLayoutComponent } from './layout/hospital-layout/hospital-layou
 import { PatientLayoutComponent } from './layout/patient-layout/patient-layout.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { ImageCaptureComponent } from './shared/components/image-capture/image-capture.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'hospital',
     component: HospitalLayoutComponent,
+  },
+  {
+    path: 'image',
+    component: ImageCaptureComponent,
   }
 ];
 

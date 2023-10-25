@@ -1,4 +1,4 @@
-<div class="patient-layout">
+<!-- <div class="patient-layout"> -->
     <!-- Voice Recording Section -->
     <!-- <div class="recording-container">
         <img src="../assets/images/Cancer (645).jpg" alt="Microphone" class="mic-image" *ngIf="recordingState != 'Recording'" (click)="toggleRecording()" />
@@ -35,23 +35,48 @@
     <!-- <div *ngIf="showThankYou" class="thank-you-message">
         Thank you for submitting your response
     </div> -->
-</div>
+<!-- </div> -->
 
 <!-- Image Upload Section -->
 <div class="patient-layout">
-    <form [formGroup]="forms" (ngSubmit)="submitForm()">
-    <div class="recording-container">
-        <input type="file"   class="form-control"        placeholder="Image name"        formControlName="name"  (change)="uploadFile($event)" accept="image/*" id="imageUpload" style="display: none" />
-        <label for="imageUpload" class="image-upload-button">
+  <div class="container">
+    <div class="card">
+      <form [formGroup]="forms" (ngSubmit)="submitForm()">
+        <div class="recording-container drop_box">
+          <input type="file" class="form-control" placeholder="Image name" formControlName="name"
+            (change)="uploadFile($event)" accept="image/*" id="imageUpload" style="display: none" />
+          <label for="imageUpload" class="image-upload-button">
             <img src="../assets/images/upload-icon.png" alt="Upload Image" class="upload-icon" />
-        </label>
-
-        <img [src]="uploadedImage" alt="Uploaded Image" *ngIf="uploadedImage" class="uploaded-image" />
-
-        <button nbButton size="giant" shape="semi-round" status="primary">
+          </label>
+          <img [src]="uploadedImage" alt="Uploaded Image" *ngIf="uploadedImage" class="uploaded-image" />
+          <button nbButton size="giant" class="btn" [disabled]="!uploadedImage" shape="semi-round" status="primary" style="margin-top: 16px">
             Submit Image
-        </button>
+          </button>
+        </div>
+      </form>
     </div>
-
-</form>
+  </div>
 </div>
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+      <nb-card-header>Result</nb-card-header>
+      <nb-card-body style="padding: 20px;">
+        <h2> The Given is confirmed as Tumor</h2>
+      </nb-card-body>
+      <nb-card-footer style="float: right;">
+        <button nbButton (click)="ref.close()">Close</button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>
+  <ng-template #dialog let-data let-ref="dialogRef2">
+    <nb-card>
+      <nb-card-header>Result</nb-card-header>
+      <nb-card-body style="padding: 20px;">
+        <h2> The Given is confirmed as Not Tumor</h2>
+      </nb-card-body>
+      <nb-card-footer style="float: right;">
+        <button nbButton (click)="ref.close()">Close</button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>
+  
